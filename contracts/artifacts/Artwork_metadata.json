@@ -418,7 +418,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/ERC721TestToken.sol": "Artwork"
+			"contracts/Artwork.sol": "Artwork"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -520,7 +520,7 @@
 				"dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy"
 			]
 		},
-		"contracts/ERC721TestToken.sol": {
+		"contracts/Artwork.sol": {
 			"keccak256": "0x8d2408a38e8fbf08de7efd3fb3b9eb01cbcc50c4a2cea56dedb0ff40ff00c540",
 			"license": "MIT",
 			"urls": [

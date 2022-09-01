@@ -67,6 +67,19 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
+						"name": "transactionId",
+						"type": "uint256"
+					}
+				],
+				"name": "rollback",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
 						"name": "_id",
 						"type": "uint256"
 					}
@@ -129,11 +142,11 @@
 			]
 		},
 		"contracts/EscrowERC721.sol": {
-			"keccak256": "0x0ee682ad79be6185d73c8583ca38c859b472d2339bca8e260cd777df39a2ca17",
+			"keccak256": "0x1c08246d728903c34b3161566bd30bbc4057f1082f9e55f090c400259e7df064",
 			"license": "UNLICENSED",
 			"urls": [
-				"bzz-raw://e3eb8217f3805ea72070dd8a6dcc3e6fb833fa3f9c609b8de4cd0514c0714636",
-				"dweb:/ipfs/Qmf74DPUXPvQbwWH23YqCtEGLLXjmb8zTt1GjtYibhaJe2"
+				"bzz-raw://7c698178d4dcddf6a2d5d410c7668ede4315c0aef14def4db453738a2af90989",
+				"dweb:/ipfs/QmZ4uRUXZrdfuhngr5QguE6snxgvrnbu7KoCFf843vsc2T"
 			]
 		}
 	},
