@@ -21,7 +21,7 @@
 						"type": "uint256"
 					}
 				],
-				"name": "Withdraw",
+				"name": "Withdrawal",
 				"type": "event"
 			},
 			{
@@ -56,7 +56,13 @@
 					}
 				],
 				"name": "deposit",
-				"outputs": [],
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
 				"stateMutability": "payable",
 				"type": "function"
 			},
@@ -77,6 +83,19 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "transactionId",
+						"type": "uint256"
+					}
+				],
+				"name": "rollback",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -126,12 +145,20 @@
 				"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr"
 			]
 		},
+		"@openzeppelin/contracts/utils/Counters.sol": {
+			"keccak256": "0xf0018c2440fbe238dd3a8732fa8e17a0f9dce84d31451dc8a32f6d62b349c9f1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://59e1c62884d55b70f3ae5432b44bb3166ad71ae3acd19c57ab6ddc3c87c325ee",
+				"dweb:/ipfs/QmezuXg5GK5oeA4F91EZhozBFekhq5TD966bHPH18cCqhu"
+			]
+		},
 		"contracts/Escrow.sol": {
-			"keccak256": "0x650914d4f9c671b31c49cec1176a0fbf05b7ced30e046f9e87b31119d96bed02",
+			"keccak256": "0xa849de0f1a028821ff5319fc08083cb7e3f8f4789c642bf25076e8ef7ff6cdc3",
 			"license": "UNLICENSED",
 			"urls": [
-				"bzz-raw://81d374d7d902023a6011a6e62cb24ef5f1eb67ce4233177428f91dd1ca83a741",
-				"dweb:/ipfs/QmX5UENnydFXb7NdBn5ZzFPc648uPhkt9CWd9cCAqVhfiG"
+				"bzz-raw://0ae088154d3db01cba2e047f44211310d54d357379fe83bf196e81a09418c793",
+				"dweb:/ipfs/QmRqEKcYwb44HME7WfrHPTrzd1rcYtzj1buiseE8QT89v1"
 			]
 		}
 	},

@@ -9,7 +9,7 @@ contract EscrowERC721 {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
-    IERC721 token;
+    IERC721 internal token;
 
     struct ERC721Item {
         address sender;

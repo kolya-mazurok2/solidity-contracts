@@ -5,7 +5,7 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract EscrowERC20 {
-    address owner;
+    address internal owner;
     mapping(bytes32 => address) public allowedTokens;
     mapping(address => mapping (bytes32 => uint256)) public balances;
 
