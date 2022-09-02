@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/home/kolya-mazurok2/Projects/remix/blockchain/contracts/Escrow.sol": {
-      "lastModificationDate": 1661959506497,
-      "contentHash": "5e28a19a7710246de51f303abf266d42",
+      "lastModificationDate": 1662108022517,
+      "contentHash": "4c167c55a70133daed43eb96f174b903",
       "sourceName": "contracts/Escrow.sol",
       "solcConfig": {
         "version": "0.8.4",
@@ -29,7 +29,8 @@
         }
       },
       "imports": [
-        "@openzeppelin/contracts/token/ERC20/IERC20.sol"
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "@openzeppelin/contracts/utils/Counters.sol"
       ],
       "versionPragmas": [
         "^0.8.4"
@@ -850,8 +851,8 @@
       ]
     },
     "/home/kolya-mazurok2/Projects/remix/blockchain/contracts/EscrowERC20.sol": {
-      "lastModificationDate": 1662013321773,
-      "contentHash": "978dc72222feb94b2255db3294142a11",
+      "lastModificationDate": 1662040795995,
+      "contentHash": "8b6209ffe45aae98db81efeab8c7d062",
       "sourceName": "contracts/EscrowERC20.sol",
       "solcConfig": {
         "version": "0.8.4",
@@ -877,7 +878,8 @@
         }
       },
       "imports": [
-        "@openzeppelin/contracts/token/ERC20/IERC20.sol"
+        "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        "@openzeppelin/contracts/utils/Counters.sol"
       ],
       "versionPragmas": [
         "^0.8.4"
@@ -886,10 +888,10 @@
         "EscrowERC20"
       ]
     },
-    "/home/kolya-mazurok2/Projects/remix/blockchain/contracts/Staker2.sol": {
-      "lastModificationDate": 1662014570049,
-      "contentHash": "7d31292f24a0b941c68433275ee5bf04",
-      "sourceName": "contracts/Staker2.sol",
+    "/home/kolya-mazurok2/Projects/remix/blockchain/contracts/Artwork.sol": {
+      "lastModificationDate": 1662108300539,
+      "contentHash": "b80563fbb7a4c4252c79ce55ea97bf2e",
+      "sourceName": "contracts/Artwork.sol",
       "solcConfig": {
         "version": "0.8.4",
         "settings": {
@@ -914,13 +916,124 @@
         }
       },
       "imports": [
-        "@openzeppelin/contracts/token/ERC20/ERC20.sol"
+        "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        "@openzeppelin/contracts/utils/Counters.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "Staking"
+        "Artwork"
+      ]
+    },
+    "/home/kolya-mazurok2/Projects/remix/blockchain/node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol": {
+      "lastModificationDate": 1661874763545,
+      "contentHash": "8af32effd0536e2971ff8496812a5016",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../ERC721.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ERC721URIStorage"
+      ]
+    },
+    "/home/kolya-mazurok2/Projects/remix/blockchain/contracts/EscrowERC721.sol": {
+      "lastModificationDate": 1662040797491,
+      "contentHash": "e7fe4a35ba788c55bf07ddc25524f395",
+      "sourceName": "contracts/EscrowERC721.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC721/IERC721.sol",
+        "@openzeppelin/contracts/utils/Counters.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "EscrowERC721"
+      ]
+    },
+    "/home/kolya-mazurok2/Projects/remix/blockchain/contracts/BasicToken.sol": {
+      "lastModificationDate": 1662108377400,
+      "contentHash": "bee6ce23da62b28416749b0279eba68f",
+      "sourceName": "contracts/BasicToken.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "BasicToken"
       ]
     }
   }

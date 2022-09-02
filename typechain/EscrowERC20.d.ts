@@ -11,7 +11,7 @@ import {
   PopulatedTransaction,
   BaseContract,
   ContractTransaction,
-  PayableOverrides,
+  Overrides,
   CallOverrides,
 } from "ethers";
 import { BytesLike } from "@ethersproject/bytes";
@@ -21,33 +21,51 @@ import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface EscrowERC20Interface extends ethers.utils.Interface {
   functions: {
-    "balance(address,address)": FunctionFragment;
-    "buy()": FunctionFragment;
-    "deposit()": FunctionFragment;
-    "token()": FunctionFragment;
+    "allowToken(bytes32,address)": FunctionFragment;
+    "allowedTokens(bytes32)": FunctionFragment;
+    "balances(address,bytes32)": FunctionFragment;
+    "deposit(uint256,bytes32,address)": FunctionFragment;
+    "rollback(uint256)": FunctionFragment;
+    "withdraw(uint256,bytes32)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: "balance",
-    values: [string, string]
+    functionFragment: "allowToken",
+    values: [BytesLike, string]
   ): string;
-  encodeFunctionData(functionFragment: "buy", values?: undefined): string;
-  encodeFunctionData(functionFragment: "deposit", values?: undefined): string;
-  encodeFunctionData(functionFragment: "token", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "allowedTokens",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "balances",
+    values: [string, BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "deposit",
+    values: [BigNumberish, BytesLike, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rollback",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdraw",
+    values: [BigNumberish, BytesLike]
+  ): string;
 
-  decodeFunctionResult(functionFragment: "balance", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "buy", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "allowToken", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "allowedTokens",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "balances", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "token", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "rollback", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
 
-  events: {
-    "Bought(uint256)": EventFragment;
-  };
-
-  getEvent(nameOrSignatureOrTopic: "Bought"): EventFragment;
+  events: {};
 }
-
-export type BoughtEvent = TypedEvent<[BigNumber] & { amount: BigNumber }>;
 
 export class EscrowERC20 extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -93,88 +111,181 @@ export class EscrowERC20 extends BaseContract {
   interface: EscrowERC20Interface;
 
   functions: {
-    balance(
+    allowToken(
+      _symbol: BytesLike,
+      _tokenAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    allowedTokens(
+      arg0: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    balances(
       arg0: string,
-      arg1: string,
+      arg1: BytesLike,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    buy(
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    deposit(
+      _amount: BigNumberish,
+      _symbol: BytesLike,
+      _receiver: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    deposit(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { amount: BigNumber }>;
+    rollback(
+      transactionId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    token(overrides?: CallOverrides): Promise<[string]>;
+    withdraw(
+      _amount: BigNumberish,
+      _symbol: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
   };
 
-  balance(
+  allowToken(
+    _symbol: BytesLike,
+    _tokenAddress: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  allowedTokens(arg0: BytesLike, overrides?: CallOverrides): Promise<string>;
+
+  balances(
     arg0: string,
-    arg1: string,
+    arg1: BytesLike,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  buy(
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  deposit(
+    _amount: BigNumberish,
+    _symbol: BytesLike,
+    _receiver: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  deposit(overrides?: CallOverrides): Promise<BigNumber>;
+  rollback(
+    transactionId: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  token(overrides?: CallOverrides): Promise<string>;
+  withdraw(
+    _amount: BigNumberish,
+    _symbol: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   callStatic: {
-    balance(
+    allowToken(
+      _symbol: BytesLike,
+      _tokenAddress: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    allowedTokens(arg0: BytesLike, overrides?: CallOverrides): Promise<string>;
+
+    balances(
       arg0: string,
-      arg1: string,
+      arg1: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    buy(overrides?: CallOverrides): Promise<void>;
+    deposit(
+      _amount: BigNumberish,
+      _symbol: BytesLike,
+      _receiver: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    deposit(overrides?: CallOverrides): Promise<BigNumber>;
+    rollback(
+      transactionId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    token(overrides?: CallOverrides): Promise<string>;
+    withdraw(
+      _amount: BigNumberish,
+      _symbol: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
-  filters: {
-    "Bought(uint256)"(
-      amount?: null
-    ): TypedEventFilter<[BigNumber], { amount: BigNumber }>;
-
-    Bought(amount?: null): TypedEventFilter<[BigNumber], { amount: BigNumber }>;
-  };
+  filters: {};
 
   estimateGas: {
-    balance(
-      arg0: string,
-      arg1: string,
+    allowToken(
+      _symbol: BytesLike,
+      _tokenAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    allowedTokens(
+      arg0: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    buy(
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    balances(
+      arg0: string,
+      arg1: BytesLike,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    deposit(overrides?: CallOverrides): Promise<BigNumber>;
+    deposit(
+      _amount: BigNumberish,
+      _symbol: BytesLike,
+      _receiver: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    token(overrides?: CallOverrides): Promise<BigNumber>;
+    rollback(
+      transactionId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    withdraw(
+      _amount: BigNumberish,
+      _symbol: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    balance(
-      arg0: string,
-      arg1: string,
+    allowToken(
+      _symbol: BytesLike,
+      _tokenAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    allowedTokens(
+      arg0: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    buy(
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    balances(
+      arg0: string,
+      arg1: BytesLike,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    deposit(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    deposit(
+      _amount: BigNumberish,
+      _symbol: BytesLike,
+      _receiver: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    token(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    rollback(
+      transactionId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    withdraw(
+      _amount: BigNumberish,
+      _symbol: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
   };
 }

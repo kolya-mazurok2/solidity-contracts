@@ -37,6 +37,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC721Enumerable__factory>;
     getContractFactory(
+      name: "ERC721URIStorage",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC721URIStorage__factory>;
+    getContractFactory(
       name: "IERC721Enumerable",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC721Enumerable__factory>;
@@ -61,6 +65,14 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC165__factory>;
     getContractFactory(
+      name: "Artwork",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Artwork__factory>;
+    getContractFactory(
+      name: "BasicToken",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BasicToken__factory>;
+    getContractFactory(
       name: "Escrow",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Escrow__factory>;
@@ -68,6 +80,10 @@ declare module "hardhat/types/runtime" {
       name: "EscrowERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.EscrowERC20__factory>;
+    getContractFactory(
+      name: "EscrowERC721",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.EscrowERC721__factory>;
     getContractFactory(
       name: "MockDaiToken",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -120,6 +136,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.ERC721Enumerable>;
     getContractAt(
+      name: "ERC721URIStorage",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC721URIStorage>;
+    getContractAt(
       name: "IERC721Enumerable",
       address: string,
       signer?: ethers.Signer
@@ -150,6 +171,16 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IERC165>;
     getContractAt(
+      name: "Artwork",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Artwork>;
+    getContractAt(
+      name: "BasicToken",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BasicToken>;
+    getContractAt(
       name: "Escrow",
       address: string,
       signer?: ethers.Signer
@@ -159,6 +190,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.EscrowERC20>;
+    getContractAt(
+      name: "EscrowERC721",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.EscrowERC721>;
     getContractAt(
       name: "MockDaiToken",
       address: string,

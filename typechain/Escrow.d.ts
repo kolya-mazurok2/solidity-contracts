@@ -11,6 +11,7 @@ import {
   PopulatedTransaction,
   BaseContract,
   ContractTransaction,
+  Overrides,
   PayableOverrides,
   CallOverrides,
 } from "ethers";
@@ -24,6 +25,7 @@ interface EscrowInterface extends ethers.utils.Interface {
     "balances(address)": FunctionFragment;
     "deposit(address)": FunctionFragment;
     "getBalanceByAddr(address)": FunctionFragment;
+    "rollback(uint256)": FunctionFragment;
     "withdraw()": FunctionFragment;
   };
 
@@ -33,6 +35,10 @@ interface EscrowInterface extends ethers.utils.Interface {
     functionFragment: "getBalanceByAddr",
     values: [string]
   ): string;
+  encodeFunctionData(
+    functionFragment: "rollback",
+    values: [BigNumberish]
+  ): string;
   encodeFunctionData(functionFragment: "withdraw", values?: undefined): string;
 
   decodeFunctionResult(functionFragment: "balances", data: BytesLike): Result;
@@ -41,16 +47,17 @@ interface EscrowInterface extends ethers.utils.Interface {
     functionFragment: "getBalanceByAddr",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "rollback", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
 
   events: {
-    "Withdraw(address,uint256)": EventFragment;
+    "Withdrawal(address,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "Withdraw"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Withdrawal"): EventFragment;
 }
 
-export type WithdrawEvent = TypedEvent<
+export type WithdrawalEvent = TypedEvent<
   [string, BigNumber] & { receiver: string; amount: BigNumber }
 >;
 
@@ -110,6 +117,11 @@ export class Escrow extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { _amount: BigNumber }>;
 
+    rollback(
+      transactionId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     withdraw(
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -127,6 +139,11 @@ export class Escrow extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  rollback(
+    transactionId: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   withdraw(
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -134,18 +151,23 @@ export class Escrow extends BaseContract {
   callStatic: {
     balances(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    deposit(_receiver: string, overrides?: CallOverrides): Promise<void>;
+    deposit(_receiver: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     getBalanceByAddr(
       _addr: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    rollback(
+      transactionId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     withdraw(overrides?: CallOverrides): Promise<void>;
   };
 
   filters: {
-    "Withdraw(address,uint256)"(
+    "Withdrawal(address,uint256)"(
       receiver?: null,
       amount?: null
     ): TypedEventFilter<
@@ -153,7 +175,7 @@ export class Escrow extends BaseContract {
       { receiver: string; amount: BigNumber }
     >;
 
-    Withdraw(
+    Withdrawal(
       receiver?: null,
       amount?: null
     ): TypedEventFilter<
@@ -175,6 +197,11 @@ export class Escrow extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    rollback(
+      transactionId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     withdraw(
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -194,6 +221,11 @@ export class Escrow extends BaseContract {
     getBalanceByAddr(
       _addr: string,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    rollback(
+      transactionId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     withdraw(
