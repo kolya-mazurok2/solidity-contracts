@@ -30,7 +30,13 @@
 					}
 				],
 				"name": "deposit",
-				"outputs": [],
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -142,11 +148,11 @@
 			]
 		},
 		"contracts/EscrowERC721.sol": {
-			"keccak256": "0x1c08246d728903c34b3161566bd30bbc4057f1082f9e55f090c400259e7df064",
+			"keccak256": "0xc6873ea0e9ba407b4b1c688819adc5c334d8d1161c2d066c59e673272c22e555",
 			"license": "UNLICENSED",
 			"urls": [
-				"bzz-raw://7c698178d4dcddf6a2d5d410c7668ede4315c0aef14def4db453738a2af90989",
-				"dweb:/ipfs/QmZ4uRUXZrdfuhngr5QguE6snxgvrnbu7KoCFf843vsc2T"
+				"bzz-raw://9f74bfb10b89a06fdc8e2584046ba106a13af69df0187982b310fe6990c781ef",
+				"dweb:/ipfs/QmYHpNB9WX2SGip82UMzNJVY8aurnKpAN5aFoBaVSfaTpp"
 			]
 		}
 	},
